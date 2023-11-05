@@ -36,4 +36,5 @@ public:
 	afx_msg void OnBnClickedButton1();
 	void DisplayImage(const cv::Mat& image); // 图像输出到 pic控件函数 传参Mat
 
+	Mat oriimg;
 };

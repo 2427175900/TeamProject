@@ -222,7 +222,7 @@ void CTeamProjectDlg::OnBnClickedButton1()
 	if (dlg.DoModal() == IDOK)
 	{
 		CString filePath = dlg.GetPathName(); // 获取选定文件的全路径
-		Mat oriimg = cv::imread(cv::String(CT2A(filePath.GetString())));
+		oriimg = cv::imread(cv::String(CT2A(filePath.GetString())));
 		DisplayImage(oriimg); // 使用封装后的函数来显示图像
 	}
 }
