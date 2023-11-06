@@ -66,6 +66,7 @@ BEGIN_MESSAGE_MAP(CTeamProjectDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON1, &CTeamProjectDlg::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_BUTTONauto, &CTeamProjectDlg::OnBnClickedButtonauto)
 END_MESSAGE_MAP()
 
 
@@ -101,7 +102,11 @@ BOOL CTeamProjectDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 작은 아이콘을 설정합니다.
 
 	// TODO: 여기에 추가 초기화 작업을 추가합니다.
-
+	seeimg1.Create(IDD_OUTIMG_DLG);
+	seeimg2.Create(IDD_OUTIMG_DLG);
+	seeimg3.Create(IDD_OUTIMG_DLG);
+	seeimg4.Create(IDD_OUTIMG_DLG);
+	seeimg5.Create(IDD_OUTIMG_DLG);
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
 
@@ -210,6 +215,60 @@ void CTeamProjectDlg::DisplayImage(const cv::Mat& image)
 	}
 }
 
+double CTeamProjectDlg::calculateNoiseSeverity(const cv::Mat& image) {
+	if (image.channels() != 1 && image.channels() != 3) {
+		// 只支持单通道（灰度）和三通道（彩色）图像
+		std::cerr << "Unsupported image format" << std::endl;
+		return -1.0;
+	}
+
+	cv::Mat grayImage;
+	if (image.channels() == 3) {
+		// 如果是三通道图像，转换为灰度图像
+		cv::cvtColor(image, grayImage, cv::COLOR_BGR2GRAY);
+	}
+	else {
+		// 如果是单通道图像，直接使用
+		grayImage = image.clone();
+	}
+
+	cv::Mat blurredImage;
+	cv::GaussianBlur(grayImage, blurredImage, cv::Size(5, 5), 0);
+
+	cv::Mat diff;
+	cv::absdiff(grayImage, blurredImage, diff);
+
+	cv::Scalar mean, stddev;
+	cv::meanStdDev(diff, mean, stddev);
+
+	double noiseSeverity = stddev.val[0] / 255.0; // 标准差归一化到0到1之间
+
+	return noiseSeverity;
+}
+// 自动选择合适的滤波器进行去噪
+cv::Mat CTeamProjectDlg ::denoiseImage(const cv::Mat& image, double noiseSeverity) {
+	cv::Mat denoisedImage;
+
+	if (noiseSeverity < 0.2) {
+		// 对于非常低噪点，使用均值滤波
+		cv::blur(image, denoisedImage, cv::Size(5, 5));
+	}
+	else if (noiseSeverity < 0.4) {
+		// 对于低噪点，使用双边滤波
+		cv::bilateralFilter(image, denoisedImage, 9, 75, 75);
+	}
+	else if (noiseSeverity < 0.7) {
+		// 对于中等噪点，使用中值滤波
+		cv::medianBlur(image, denoisedImage, 5);
+	}
+	else {
+		// 对于较高噪点，使用高斯滤波
+		cv::GaussianBlur(image, denoisedImage, cv::Size(5, 5), 0);
+	}
+
+	return denoisedImage;
+}
+
 
 void CTeamProjectDlg::OnBnClickedButton1()
 {
@@ -225,4 +284,18 @@ void CTeamProjectDlg::OnBnClickedButton1()
 		oriimg = cv::imread(cv::String(CT2A(filePath.GetString())));
 		DisplayImage(oriimg); // 使用封装后的函数来显示图像
 	}
+}
+
+
+void CTeamProjectDlg::OnBnClickedButtonauto()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	double noiseSeverity;//噪点强度
+	noiseSeverity = calculateNoiseSeverity(oriimg);//分析噪点强度
+	outimg = denoiseImage(oriimg,noiseSeverity);//去噪
+
+
+	seeimg1.SetinImage(oriimg);
+	seeimg1.SetoutImage(outimg);
+	seeimg1.ShowWindow(SW_NORMAL);
 }

@@ -1,9 +1,12 @@
-﻿  pch.cpp
-  TeamProject.cpp
+﻿  TeamProject.cpp
 C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 该文件包含不能在当前代码页(949)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
 C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 该文件包含不能在当前代码页(949)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
 C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 该文件包含不能在当前代码页(949)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
   TeamProjectDlg.cpp
+C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 该文件包含不能在当前代码页(949)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 该文件包含不能在当前代码页(949)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 该文件包含不能在当前代码页(949)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  seeimg.cpp
 C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 该文件包含不能在当前代码页(949)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
 C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 该文件包含不能在当前代码页(949)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
 C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 该文件包含不能在当前代码页(949)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失

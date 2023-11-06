@@ -4,6 +4,7 @@
 
 #pragma once
 #include"opencv2/opencv.hpp"
+#include"seeimg.h"
 using namespace cv;
 
 // CTeamProjectDlg 대화 상자
@@ -36,5 +37,20 @@ public:
 	afx_msg void OnBnClickedButton1();
 	void DisplayImage(const cv::Mat& image); // 图像输出到 pic控件函数 传参Mat
 
+	double calculateNoiseSeverity(const cv::Mat& image);//分析噪点强度
+
+	cv::Mat denoiseImage(const cv::Mat& image, double noiseSeverity);//去噪
+
 	Mat oriimg;
+	Mat outimg;
+
+private:
+	seeimg seeimg1;
+	seeimg seeimg2;
+	seeimg seeimg3;
+	seeimg seeimg4;
+	seeimg seeimg5;
+	
+public:
+	afx_msg void OnBnClickedButtonauto();
 };

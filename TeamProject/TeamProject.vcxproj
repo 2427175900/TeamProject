@@ -189,6 +189,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="seeimg.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TeamProject.h" />
     <ClInclude Include="TeamProjectDlg.h" />
@@ -200,6 +201,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="seeimg.cpp" />
     <ClCompile Include="TeamProject.cpp" />
     <ClCompile Include="TeamProjectDlg.cpp" />
   </ItemGroup>
