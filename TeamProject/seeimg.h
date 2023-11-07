@@ -17,6 +17,7 @@ public:
 	Mat recive_output;
 
 	void DisplayinImage(const cv::Mat& image); // 图像输出到 pic控件函数 传参Mat
+
 	void DisplayoutImage(const cv::Mat& image); // 图像输出到 pic控件函数 传参Mat
 
 	void SetinImage(Mat img);

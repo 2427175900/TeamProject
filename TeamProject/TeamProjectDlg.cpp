@@ -67,6 +67,10 @@ BEGIN_MESSAGE_MAP(CTeamProjectDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON1, &CTeamProjectDlg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_BUTTONauto, &CTeamProjectDlg::OnBnClickedButtonauto)
+	ON_BN_CLICKED(IDC_BUTTON3, &CTeamProjectDlg::OnBnClickedButton3)
+	ON_BN_CLICKED(IDC_BUTTON4, &CTeamProjectDlg::OnBnClickedButton4)
+	ON_BN_CLICKED(IDC_BUTTON5, &CTeamProjectDlg::OnBnClickedButton5)
+	ON_BN_CLICKED(IDC_BUTTON6, &CTeamProjectDlg::OnBnClickedButton6)
 END_MESSAGE_MAP()
 
 
@@ -269,6 +273,30 @@ cv::Mat CTeamProjectDlg ::denoiseImage(const cv::Mat& image, double noiseSeverit
 	return denoisedImage;
 }
 
+cv::Mat  CTeamProjectDlg::applyGaussianFilter(const cv::Mat& image) {
+	cv::Mat denoisedImage;
+	cv::GaussianBlur(image, denoisedImage, cv::Size(5, 5), 0);
+	return denoisedImage;
+}
+
+cv::Mat  CTeamProjectDlg::applyMedianFilter(const cv::Mat& image) {
+	cv::Mat denoisedImage;
+	cv::medianBlur(image, denoisedImage, 5);
+	return denoisedImage;
+}
+
+cv::Mat   CTeamProjectDlg ::CTeamProjectDlg::applyBilateralFilter(const cv::Mat& image) {
+	cv::Mat denoisedImage;
+	cv::bilateralFilter(image, denoisedImage, 9, 75, 75);
+	return denoisedImage;
+}
+
+cv::Mat  CTeamProjectDlg::applyMeanFilter(const cv::Mat& image) {
+	cv::Mat denoisedImage;
+	cv::blur(image, denoisedImage, cv::Size(5, 5));
+	return denoisedImage;
+}
+
 
 void CTeamProjectDlg::OnBnClickedButton1()
 {
@@ -298,4 +326,45 @@ void CTeamProjectDlg::OnBnClickedButtonauto()
 	seeimg1.SetinImage(oriimg);
 	seeimg1.SetoutImage(outimg);
 	seeimg1.ShowWindow(SW_NORMAL);
+}
+
+
+void CTeamProjectDlg::OnBnClickedButton3()
+{
+	// TODO: 在此添加控件通知处理程序代码
+
+	outimg = applyGaussianFilter(oriimg);
+	seeimg2.SetinImage(oriimg);
+	seeimg2.SetoutImage(outimg);
+	seeimg2.ShowWindow(SW_NORMAL);
+}
+
+
+void CTeamProjectDlg::OnBnClickedButton4()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	outimg = applyMedianFilter(oriimg);
+	seeimg3.SetinImage(oriimg);
+	seeimg3.SetoutImage(outimg);
+	seeimg3.ShowWindow(SW_NORMAL);
+}
+
+
+void CTeamProjectDlg::OnBnClickedButton5()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	outimg = applyBilateralFilter(oriimg);
+	seeimg4.SetinImage(oriimg);
+	seeimg4.SetoutImage(outimg);
+	seeimg4.ShowWindow(SW_NORMAL);
+}
+
+
+void CTeamProjectDlg::OnBnClickedButton6()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	outimg = applyMeanFilter(oriimg);
+	seeimg5.SetinImage(oriimg);
+	seeimg5.SetoutImage(outimg);
+	seeimg5.ShowWindow(SW_NORMAL);
 }

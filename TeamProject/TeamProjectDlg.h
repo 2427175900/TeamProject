@@ -41,7 +41,14 @@ public:
 
 	cv::Mat denoiseImage(const cv::Mat& image, double noiseSeverity);//去噪
 
-	Mat oriimg;
+	cv::Mat applyGaussianFilter(const cv::Mat& image);//高斯
+
+	cv::Mat applyMedianFilter(const cv::Mat& image);//中值
+
+	cv::Mat applyBilateralFilter(const cv::Mat& image);//双边
+
+	cv::Mat applyMeanFilter(const cv::Mat& image);//均值
+    Mat oriimg;
 	Mat outimg;
 
 private:
@@ -53,4 +60,8 @@ private:
 	
 public:
 	afx_msg void OnBnClickedButtonauto();
+	afx_msg void OnBnClickedButton3();
+	afx_msg void OnBnClickedButton4();
+	afx_msg void OnBnClickedButton5();
+	afx_msg void OnBnClickedButton6();
 };
