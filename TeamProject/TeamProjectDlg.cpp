@@ -59,6 +59,9 @@ CTeamProjectDlg::CTeamProjectDlg(CWnd* pParent /*=nullptr*/)
 void CTeamProjectDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_BUTTON1, noisetext);
+	DDX_Control(pDX, IDC_BUTTON1, noisetext);
+	DDX_Control(pDX, NoiseText, noisetext);
 }
 
 BEGIN_MESSAGE_MAP(CTeamProjectDlg, CDialogEx)
@@ -158,6 +161,73 @@ void CTeamProjectDlg::OnPaint()
 
 // 사용자가 최소화된 창을 끄는 동안에 커서가 표시되도록 시스템에서
 //  이 함수를 호출합니다.
+
+
+//---------------------------------------------------------//
+//噪声检测部分//
+// 检测椒盐噪声
+bool detectSaltAndPepperNoise(const cv::Mat& img, double threshold = 0.05) {
+	int count_sp = 0;
+	for (int i = 0; i < img.rows; ++i) {
+		for (int j = 0; j < img.cols; ++j) {
+			if (img.at<uchar>(i, j) == 255 || img.at<uchar>(i, j) == 0) {
+				count_sp++;
+			}
+		}
+	}
+	double sp_ratio = static_cast<double>(count_sp) / (img.rows * img.cols);
+	return sp_ratio > threshold;
+}
+
+// 检测高斯噪声
+bool detectGaussianNoise(const cv::Mat& img, double threshold = 1.0) {
+	cv::Mat mean, stddev;
+	cv::meanStdDev(img, mean, stddev);
+	double std_dev = stddev.at<double>(0, 0);
+	return std_dev > threshold;
+}
+
+// 检测斑点噪声
+bool detectSpeckleNoise(const cv::Mat& img, double threshold = 1.0) {
+	cv::Mat gray, squared, mean, stddev;
+	cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
+	cv::multiply(gray, gray, squared);
+	cv::meanStdDev(squared, mean, stddev);
+	double variance = stddev.at<double>(0, 0) * stddev.at<double>(0, 0);
+	return variance > threshold;
+}
+
+// 检测泊松噪声
+bool detectPoissonNoise(const cv::Mat& img) {
+	// 对于泊松噪声，通常需要更复杂的分析，这里提供一个简化的检测方法
+	cv::Mat gray;
+	cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
+	double minVal, maxVal;
+	cv::minMaxLoc(gray, &minVal, &maxVal);
+	return maxVal < 128; // 假设在低亮度下泊松噪声更明显
+}
+
+std::string detectNoiseType(const cv::Mat& img) {
+	if (detectSaltAndPepperNoise(img)) {
+		return "Salt-and-Pepper";
+	}
+	else if (detectGaussianNoise(img)) {
+		return "Gaussian";
+	}
+	else if (detectSpeckleNoise(img)) {
+		return "Speckle";
+	}
+	else if (detectPoissonNoise(img)) {
+		return "Poisson";
+	}
+	else {
+		return "None";
+	}
+}
+
+
+//---------------------------------//
+
 HCURSOR CTeamProjectDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
@@ -248,31 +318,11 @@ double CTeamProjectDlg::calculateNoiseSeverity(const cv::Mat& image) {
 	double noiseSeverity = stddev.val[0] / 255.0; // 标准差归一化到0到1之间
 
 	return noiseSeverity;
+
 }
 // 自动选择合适的滤波器进行去噪
-cv::Mat CTeamProjectDlg ::denoiseImage(const cv::Mat& image, double noiseSeverity) {
-	cv::Mat denoisedImage;
 
-	if (noiseSeverity < 0.2) {
-		// 对于非常低噪点，使用均值滤波
-		cv::blur(image, denoisedImage, cv::Size(5, 5));
-	}
-	else if (noiseSeverity < 0.4) {
-		// 对于低噪点，使用双边滤波
-		cv::bilateralFilter(image, denoisedImage, 9, 75, 75);
-	}
-	else if (noiseSeverity < 0.7) {
-		// 对于中等噪点，使用中值滤波
-		cv::medianBlur(image, denoisedImage, 5);
-	}
-	else {
-		// 对于较高噪点，使用高斯滤波
-		cv::GaussianBlur(image, denoisedImage, cv::Size(5, 5), 0);
-	}
-
-	return denoisedImage;
-}
-
+//手动滤波器
 cv::Mat  CTeamProjectDlg::applyGaussianFilter(const cv::Mat& image) {
 	cv::Mat denoisedImage;
 	cv::GaussianBlur(image, denoisedImage, cv::Size(5, 5), 0);
@@ -312,19 +362,54 @@ void CTeamProjectDlg::OnBnClickedButton1()
 		oriimg = cv::imread(cv::String(CT2A(filePath.GetString())));
 		DisplayImage(oriimg); // 使用封装后的函数来显示图像
 	}
+	double num  = calculateNoiseSeverity(oriimg);
+	if (num < 0.05) {
+		SetDlgItemText(NoiseText, _T("Noise Severity: Low "));
+	}
+	else if (num >= 0.05 && num < 0.10) {
+		SetDlgItemText(NoiseText, _T("Noise Severity: Moderate"));
+	}
+	else if (num >= 0.10 && num < 0.17) {
+		SetDlgItemText(NoiseText, _T("Noise Severity: High"));
+	}
+	else {
+		SetDlgItemText(NoiseText, _T("Noise Severity: Very High"));
+	}
+	std::string num1;
+	num1 = std::to_string(num);
+	std::wstring wnum(num1.begin(), num1.end());
+	AfxMessageBox(wnum.c_str());
+
 }
 
 
 void CTeamProjectDlg::OnBnClickedButtonauto()
 {
 	// TODO: 在此添加控件通知处理程序代码
-	double noiseSeverity;//噪点强度
-	noiseSeverity = calculateNoiseSeverity(oriimg);//分析噪点强度
-	outimg = denoiseImage(oriimg,noiseSeverity);//去噪
+	String str;
+	if (detectNoiseType(oriimg) == "Salt-and-Pepper") {
+		medianBlur(oriimg, outimg, 5);
+		str = "Noise type : Salt-and-Pepper \nFilter : Median ";
+	}
+	else if (detectNoiseType(oriimg) == "Gaussian") {
+		GaussianBlur(oriimg, outimg, cv::Size(5, 5), 0);
+		str = "Noise type : Gaussian \nFilter : Gaussian  ";
+	}
+	else if (detectNoiseType(oriimg) == "Speckle") {
+		bilateralFilter(oriimg, outimg, 9, 75, 75);
+		str = "Noise type : Speckle  \nFilter : Bilateral   ";
+	}
+	else if (detectNoiseType(oriimg) == "Poisson") {
+	
+	}else if (detectNoiseType(oriimg) == "None") {
+	
+	}
+
 
 
 	seeimg1.SetinImage(oriimg);
 	seeimg1.SetoutImage(outimg);
+	seeimg1.SetFilterString(str);
 	seeimg1.ShowWindow(SW_NORMAL);
 }
 

@@ -81,6 +81,8 @@ void seeimg::SetinImage(Mat img) {
 }
 void seeimg::SetoutImage(Mat img) {
 	recive_output = img;
+}void seeimg::SetFilterString (std::string str) {
+	mes = str;
 }
 
 void seeimg::DisplayoutImage(const cv::Mat& image)
@@ -142,6 +144,7 @@ void seeimg::DisplayoutImage(const cv::Mat& image)
 void seeimg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, zongjie, zongjietext);
 }
 
 
@@ -158,4 +161,6 @@ void seeimg::OnBnClickedButton1()
 	// TODO: 在此添加控件通知处理程序代码
 	DisplayinImage(recive_input);
 	DisplayoutImage(recive_output);
+	std::wstring wmes(mes.begin(), mes.end());
+	SetDlgItemText(zongjie,wmes.c_str());
 }
