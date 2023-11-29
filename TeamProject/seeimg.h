@@ -39,4 +39,5 @@ public:
 	afx_msg void OnBnClickedButton1();
 	CStatic zongjietext;
 	afx_msg void OnBnClickedOutbut();
+	afx_msg void OnBnClickedButton2();
 };

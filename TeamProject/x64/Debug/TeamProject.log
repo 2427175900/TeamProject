@@ -1,14 +1,14 @@
 ﻿  TeamProject.cpp
-C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 该文件包含不能在当前代码页(949)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 该文件包含不能在当前代码页(949)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 该文件包含不能在当前代码页(949)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
   TeamProjectDlg.cpp
-C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 该文件包含不能在当前代码页(949)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 该文件包含不能在当前代码页(949)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 该文件包含不能在当前代码页(949)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
   seeimg.cpp
-C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 该文件包含不能在当前代码页(949)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 该文件包含不能在当前代码页(949)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 该文件包含不能在当前代码页(949)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
-  正在生成代码...
-  TeamProject.vcxproj -> E:\TeamProject\TeamProject\x64\Debug\TeamProject.exe
+C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+C:\opencv\build\include\opencv2\core.hpp(1744,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+  코드를 생성하고 있습니다...
+  TeamProject.vcxproj -> C:\Users\a2427\Desktop\TeamProject\TeamProject\x64\Debug\TeamProject.exe

@@ -375,10 +375,10 @@ void CTeamProjectDlg::OnBnClickedButton1()
 	else {
 		SetDlgItemText(NoiseText, _T("Noise Severity: Very High"));
 	}
-	std::string num1;
-	num1 = std::to_string(num);
-	std::wstring wnum(num1.begin(), num1.end());
-	AfxMessageBox(wnum.c_str());
+	//std::string num1;
+	//num1 = std::to_string(num);
+	//std::wstring wnum(num1.begin(), num1.end());
+	//AfxMessageBox(wnum.c_str());
 
 }
 
@@ -409,8 +409,10 @@ void CTeamProjectDlg::OnBnClickedButtonauto()
 
 
 
+	//seeimg seeimg1 = new seeimg()/*;*/
 	seeimg1.SetinImage(oriimg);
 	seeimg1.SetoutImage(outimg);
+	
 	seeimg1.SetFilterString(str);
 	seeimg1.ShowWindow(SW_NORMAL);
 }
@@ -423,6 +425,7 @@ void CTeamProjectDlg::OnBnClickedButton3()
 	outimg = applyGaussianFilter(oriimg);
 	seeimg2.SetinImage(oriimg);
 	seeimg2.SetoutImage(outimg);
+	seeimg2.SetFilterString("Filter : Gaussian");
 	seeimg2.ShowWindow(SW_NORMAL);
 }
 
@@ -433,6 +436,7 @@ void CTeamProjectDlg::OnBnClickedButton4()
 	outimg = applyMedianFilter(oriimg);
 	seeimg3.SetinImage(oriimg);
 	seeimg3.SetoutImage(outimg);
+	seeimg3.SetFilterString("Filter : Median");
 	seeimg3.ShowWindow(SW_NORMAL);
 }
 
@@ -443,6 +447,7 @@ void CTeamProjectDlg::OnBnClickedButton5()
 	outimg = applyBilateralFilter(oriimg);
 	seeimg4.SetinImage(oriimg);
 	seeimg4.SetoutImage(outimg);
+	seeimg4.SetFilterString("Filter : Bilateral");
 	seeimg4.ShowWindow(SW_NORMAL);
 }
 
@@ -453,5 +458,6 @@ void CTeamProjectDlg::OnBnClickedButton6()
 	outimg = applyMeanFilter(oriimg);
 	seeimg5.SetinImage(oriimg);
 	seeimg5.SetoutImage(outimg);
+	seeimg5.SetFilterString("Filter : Mean");
 	seeimg5.ShowWindow(SW_NORMAL);
 }

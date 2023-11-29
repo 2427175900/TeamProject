@@ -7,7 +7,6 @@
 #include "seeimg.h"
 
 
-// seeimg 对话框
 
 IMPLEMENT_DYNAMIC(seeimg, CDialogEx)
 
@@ -15,11 +14,16 @@ seeimg::seeimg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_OUTIMG_DLG, pParent)
 {
 
+
 }
 
 seeimg::~seeimg()
 {
 }
+
+
+
+
 
 void seeimg::DisplayinImage(const cv::Mat& image)
 {
@@ -151,6 +155,7 @@ void seeimg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(seeimg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON1, &seeimg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_OUTBUT, &seeimg::OnBnClickedOutbut)
+	ON_BN_CLICKED(IDC_BUTTON2, &seeimg::OnBnClickedButton2)
 END_MESSAGE_MAP()
 
 
@@ -171,4 +176,12 @@ void seeimg::OnBnClickedOutbut()
 {
 	cv::imwrite("outputimg.jpg",recive_output);
 	// TODO: 在此添加控件通知处理程序代码
+}
+
+
+void seeimg::OnBnClickedButton2()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	cv::imshow("input",recive_input);
+	cv::imshow("ouput",recive_output);
 }
