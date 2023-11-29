@@ -400,6 +400,8 @@ void CTeamProjectDlg::OnBnClickedButtonauto()
 		str = "Noise type : Speckle  \nFilter : Bilateral   ";
 	}
 	else if (detectNoiseType(oriimg) == "Poisson") {
+		medianBlur(oriimg, outimg, 5);
+		str = "Noise type : Poisson \nFilter : Median ";
 	
 	}else if (detectNoiseType(oriimg) == "None") {
 	

@@ -150,6 +150,7 @@ void seeimg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(seeimg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON1, &seeimg::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_OUTBUT, &seeimg::OnBnClickedOutbut)
 END_MESSAGE_MAP()
 
 
@@ -163,4 +164,11 @@ void seeimg::OnBnClickedButton1()
 	DisplayoutImage(recive_output);
 	std::wstring wmes(mes.begin(), mes.end());
 	SetDlgItemText(zongjie,wmes.c_str());
+}
+
+
+void seeimg::OnBnClickedOutbut()
+{
+	cv::imwrite("outputimg.jpg",recive_output);
+	// TODO: 在此添加控件通知处理程序代码
 }

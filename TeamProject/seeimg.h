@@ -38,4 +38,5 @@ protected:
 public:
 	afx_msg void OnBnClickedButton1();
 	CStatic zongjietext;
+	afx_msg void OnBnClickedOutbut();
 };
